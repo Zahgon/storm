@@ -62,65 +62,39 @@ type node struct {
 
 // From returns a new Storm Node with a new bucket root below the current.
 // All DB operations on the new node will be executed relative to this bucket.
-func (n node) From(addend ...string) Node {
-	n.rootBucket = append(n.rootBucket, addend...)
-	return &n
-}
+func (n node) From(addend ...string) Node { _ = "STUB: not implemented"; return *new(Node) }
 
 // WithTransaction returns a new Storm Node that will use the given transaction.
 func (n node) WithTransaction(tx *bolt.Tx) Node {
-	n.tx = tx
-	return &n
+	_ = "STUB: not implemented"
+	return *
+
+	// WithCodec returns a new Storm Node that will use the given Codec.
+	new(Node)
 }
 
-// WithCodec returns a new Storm Node that will use the given Codec.
 func (n node) WithCodec(codec codec.MarshalUnmarshaler) Node {
-	n.codec = codec
-	return &n
+	_ = "STUB: not implemented"
+	return *new(Node)
 }
 
 // WithBatch returns a new Storm Node with the batch mode enabled.
-func (n node) WithBatch(enabled bool) Node {
-	n.batchMode = enabled
-	return &n
-}
+func (n node) WithBatch(enabled bool) Node { _ = "STUB: not implemented"; return *new(Node) }
 
 // Bucket returns the bucket name as a slice from the root.
 // In the normal, simple case this will be empty.
-func (n *node) Bucket() []string {
-	return n.rootBucket
-}
+func (n *node) Bucket() []string { _ = "STUB: not implemented"; return nil }
 
 // Codec returns the EncodeDecoder used by this instance of Storm
 func (n *node) Codec() codec.MarshalUnmarshaler {
-	return n.codec
+	_ = "STUB: not implemented"
+
+	// Detects if already in transaction or runs a read write transaction.
+	// Uses batch mode if enabled.
+	return *new(codec.MarshalUnmarshaler)
 }
 
-// Detects if already in transaction or runs a read write transaction.
-// Uses batch mode if enabled.
-func (n *node) readWriteTx(fn func(tx *bolt.Tx) error) error {
-	if n.tx != nil {
-		return fn(n.tx)
-	}
-
-	if n.batchMode {
-		return n.s.Bolt.Batch(func(tx *bolt.Tx) error {
-			return fn(tx)
-		})
-	}
-
-	return n.s.Bolt.Update(func(tx *bolt.Tx) error {
-		return fn(tx)
-	})
-}
+func (n *node) readWriteTx(fn func(tx *bolt.Tx) error) error { _ = "STUB: not implemented"; return nil }
 
 // Detects if already in transaction or runs a read transaction.
-func (n *node) readTx(fn func(tx *bolt.Tx) error) error {
-	if n.tx != nil {
-		return fn(n.tx)
-	}
-
-	return n.s.Bolt.View(func(tx *bolt.Tx) error {
-		return fn(tx)
-	})
-}
+func (n *node) readTx(fn func(tx *bolt.Tx) error) error { _ = "STUB: not implemented"; return nil }

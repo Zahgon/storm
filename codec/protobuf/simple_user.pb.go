@@ -6,16 +6,22 @@
 Package protobuf is a generated protocol buffer package.
 
 It is generated from these files:
+
 	simple_user.proto
 
 It has these top-level messages:
+
 	SimpleUser
 */
 package protobuf
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+
+	proto "github.com/golang/protobuf/proto"
+
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -32,10 +38,10 @@ type SimpleUser struct {
 	Age  int32  `protobuf:"varint,3,opt,name=age" json:"age,omitempty"`
 }
 
-func (m *SimpleUser) Reset()                    { *m = SimpleUser{} }
-func (m *SimpleUser) String() string            { return proto.CompactTextString(m) }
-func (*SimpleUser) ProtoMessage()               {}
-func (*SimpleUser) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (m *SimpleUser) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *SimpleUser) String() string            { _ = "STUB: not implemented"; return "" }
+func (*SimpleUser) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*SimpleUser) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
 
 func init() {
 	proto.RegisterType((*SimpleUser)(nil), "protobuf.SimpleUser")

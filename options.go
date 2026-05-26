@@ -10,67 +10,31 @@ import (
 
 // BoltOptions used to pass options to BoltDB.
 func BoltOptions(mode os.FileMode, options *bolt.Options) func(*Options) error {
-	return func(opts *Options) error {
-		opts.boltMode = mode
-		opts.boltOptions = options
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Codec used to set a custom encoder and decoder. The default is JSON.
-func Codec(c codec.MarshalUnmarshaler) func(*Options) error {
-	return func(opts *Options) error {
-		opts.codec = c
-		return nil
-	}
-}
+func Codec(c codec.MarshalUnmarshaler) func(*Options) error { _ = "STUB: not implemented"; return nil }
 
 // Batch enables the use of batch instead of update for read-write transactions.
-func Batch() func(*Options) error {
-	return func(opts *Options) error {
-		opts.batchMode = true
-		return nil
-	}
-}
+func Batch() func(*Options) error { _ = "STUB: not implemented"; return nil }
 
 // Root used to set the root bucket. See also the From method.
-func Root(root ...string) func(*Options) error {
-	return func(opts *Options) error {
-		opts.rootBucket = root
-		return nil
-	}
-}
+func Root(root ...string) func(*Options) error { _ = "STUB: not implemented"; return nil }
 
 // UseDB allows Storm to use an existing open Bolt.DB.
 // Warning: storm.DB.Close() will close the bolt.DB instance.
-func UseDB(b *bolt.DB) func(*Options) error {
-	return func(opts *Options) error {
-		opts.path = b.Path()
-		opts.bolt = b
-		return nil
-	}
-}
+func UseDB(b *bolt.DB) func(*Options) error { _ = "STUB: not implemented"; return nil }
 
 // Limit sets the maximum number of records to return
-func Limit(limit int) func(*index.Options) {
-	return func(opts *index.Options) {
-		opts.Limit = limit
-	}
-}
+func Limit(limit int) func(*index.Options) { _ = "STUB: not implemented"; return nil }
 
 // Skip sets the number of records to skip
-func Skip(offset int) func(*index.Options) {
-	return func(opts *index.Options) {
-		opts.Skip = offset
-	}
-}
+func Skip(offset int) func(*index.Options) { _ = "STUB: not implemented"; return nil }
 
 // Reverse will return the results in descending order
-func Reverse() func(*index.Options) {
-	return func(opts *index.Options) {
-		opts.Reverse = true
-	}
-}
+func Reverse() func(*index.Options) { _ = "STUB: not implemented"; return nil }
 
 // Options are used to customize the way Storm opens a database.
 type Options struct {

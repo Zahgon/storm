@@ -1,10 +1,6 @@
 // Package sereal contains a codec to encode and decode entities using Sereal
 package sereal
 
-import (
-	"github.com/Sereal/Sereal/Go/sereal"
-)
-
 const name = "sereal"
 
 // Codec that encodes to and decodes using Sereal.
@@ -16,13 +12,13 @@ var Codec = new(serealCodec)
 type serealCodec int
 
 func (c serealCodec) Marshal(v interface{}) ([]byte, error) {
-	return sereal.Marshal(v)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c serealCodec) Unmarshal(b []byte, v interface{}) error {
-	return sereal.Unmarshal(b, v)
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (c serealCodec) Name() string {
-	return name
-}
+func (c serealCodec) Name() string { _ = "STUB: not implemented"; return "" }

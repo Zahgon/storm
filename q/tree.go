@@ -24,51 +24,28 @@ type cmp struct {
 	token token.Token
 }
 
-func (c *cmp) MatchField(v interface{}) (bool, error) {
-	return compare(v, c.value, c.token), nil
-}
+func (c *cmp) MatchField(v interface{}) (bool, error) { _ = "STUB: not implemented"; return false, nil }
 
 type trueMatcher struct{}
 
 func (*trueMatcher) Match(i interface{}) (bool, error) {
-	return true, nil
+	_ = "STUB: not implemented"
+	return false, nil
 }
 
 func (*trueMatcher) MatchValue(v *reflect.Value) (bool, error) {
-	return true, nil
+	_ = "STUB: not implemented"
+	return false, nil
 }
 
 type or struct {
 	children []Matcher
 }
 
-func (c *or) Match(i interface{}) (bool, error) {
-	v := reflect.Indirect(reflect.ValueOf(i))
-	return c.MatchValue(&v)
-}
+func (c *or) Match(i interface{}) (bool, error) { _ = "STUB: not implemented"; return false, nil }
 
 func (c *or) MatchValue(v *reflect.Value) (bool, error) {
-	for _, matcher := range c.children {
-		if vm, ok := matcher.(ValueMatcher); ok {
-			ok, err := vm.MatchValue(v)
-			if err != nil {
-				return false, err
-			}
-			if ok {
-				return true, nil
-			}
-			continue
-		}
-
-		ok, err := matcher.Match(v.Interface())
-		if err != nil {
-			return false, err
-		}
-		if ok {
-			return true, nil
-		}
-	}
-
+	_ = "STUB: not implemented"
 	return false, nil
 }
 
@@ -76,34 +53,11 @@ type and struct {
 	children []Matcher
 }
 
-func (c *and) Match(i interface{}) (bool, error) {
-	v := reflect.Indirect(reflect.ValueOf(i))
-	return c.MatchValue(&v)
-}
+func (c *and) Match(i interface{}) (bool, error) { _ = "STUB: not implemented"; return false, nil }
 
 func (c *and) MatchValue(v *reflect.Value) (bool, error) {
-	for _, matcher := range c.children {
-		if vm, ok := matcher.(ValueMatcher); ok {
-			ok, err := vm.MatchValue(v)
-			if err != nil {
-				return false, err
-			}
-			if !ok {
-				return false, nil
-			}
-			continue
-		}
-
-		ok, err := matcher.Match(v.Interface())
-		if err != nil {
-			return false, err
-		}
-		if !ok {
-			return false, nil
-		}
-	}
-
-	return true, nil
+	_ = "STUB: not implemented"
+	return false, nil
 }
 
 type strictEq struct {
@@ -112,136 +66,77 @@ type strictEq struct {
 }
 
 func (s *strictEq) MatchField(v interface{}) (bool, error) {
-	return reflect.DeepEqual(v, s.value), nil
+	_ = "STUB: not implemented"
+	return false, nil
 }
 
 type in struct {
 	list interface{}
 }
 
-func (i *in) MatchField(v interface{}) (bool, error) {
-	ref := reflect.ValueOf(i.list)
-	if ref.Kind() != reflect.Slice {
-		return false, nil
-	}
-
-	c := cmp{
-		token: token.EQL,
-	}
-
-	for i := 0; i < ref.Len(); i++ {
-		c.value = ref.Index(i).Interface()
-		ok, err := c.MatchField(v)
-		if err != nil {
-			return false, err
-		}
-		if ok {
-			return true, nil
-		}
-	}
-
-	return false, nil
-}
+func (i *in) MatchField(v interface{}) (bool, error) { _ = "STUB: not implemented"; return false, nil }
 
 type not struct {
 	children []Matcher
 }
 
-func (n *not) Match(i interface{}) (bool, error) {
-	v := reflect.Indirect(reflect.ValueOf(i))
-	return n.MatchValue(&v)
-}
+func (n *not) Match(i interface{}) (bool, error) { _ = "STUB: not implemented"; return false, nil }
 
 func (n *not) MatchValue(v *reflect.Value) (bool, error) {
-	var err error
-
-	for _, matcher := range n.children {
-		vm, ok := matcher.(ValueMatcher)
-		if ok {
-			ok, err = vm.MatchValue(v)
-		} else {
-			ok, err = matcher.Match(v.Interface())
-		}
-		if err != nil {
-			return false, err
-		}
-		if ok {
-			return false, nil
-		}
-	}
-
-	return true, nil
+	_ = "STUB: not implemented"
+	return false, nil
 }
 
 // Eq matcher, checks if the given field is equal to the given value
-func Eq(field string, v interface{}) Matcher {
-	return NewFieldMatcher(field, &cmp{value: v, token: token.EQL})
-}
+func Eq(field string, v interface{}) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // EqF matcher, checks if the given field is equal to the given field
-func EqF(field1, field2 string) Matcher {
-	return NewField2FieldMatcher(field1, field2, token.EQL)
-}
+func EqF(field1, field2 string) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // StrictEq matcher, checks if the given field is deeply equal to the given value
-func StrictEq(field string, v interface{}) Matcher {
-	return NewFieldMatcher(field, &strictEq{value: v})
-}
+func StrictEq(field string, v interface{}) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // Gt matcher, checks if the given field is greater than the given value
-func Gt(field string, v interface{}) Matcher {
-	return NewFieldMatcher(field, &cmp{value: v, token: token.GTR})
-}
+func Gt(field string, v interface{}) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // GtF matcher, checks if the given field is greater than the given field
-func GtF(field1, field2 string) Matcher {
-	return NewField2FieldMatcher(field1, field2, token.GTR)
-}
+func GtF(field1, field2 string) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // Gte matcher, checks if the given field is greater than or equal to the given value
-func Gte(field string, v interface{}) Matcher {
-	return NewFieldMatcher(field, &cmp{value: v, token: token.GEQ})
-}
+func Gte(field string, v interface{}) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // GteF matcher, checks if the given field is greater than or equal to the given field
-func GteF(field1, field2 string) Matcher {
-	return NewField2FieldMatcher(field1, field2, token.GEQ)
-}
+func GteF(field1, field2 string) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // Lt matcher, checks if the given field is lesser than the given value
-func Lt(field string, v interface{}) Matcher {
-	return NewFieldMatcher(field, &cmp{value: v, token: token.LSS})
-}
+func Lt(field string, v interface{}) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // LtF matcher, checks if the given field is lesser than the given field
-func LtF(field1, field2 string) Matcher {
-	return NewField2FieldMatcher(field1, field2, token.LSS)
-}
+func LtF(field1, field2 string) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // Lte matcher, checks if the given field is lesser than or equal to the given value
-func Lte(field string, v interface{}) Matcher {
-	return NewFieldMatcher(field, &cmp{value: v, token: token.LEQ})
-}
+func Lte(field string, v interface{}) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // LteF matcher, checks if the given field is lesser than or equal to the given field
-func LteF(field1, field2 string) Matcher {
-	return NewField2FieldMatcher(field1, field2, token.LEQ)
-}
+func LteF(field1, field2 string) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // In matcher, checks if the given field matches one of the value of the given slice.
 // v must be a slice.
-func In(field string, v interface{}) Matcher {
-	return NewFieldMatcher(field, &in{list: v})
-}
+func In(field string, v interface{}) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // True matcher, always returns true
-func True() Matcher { return &trueMatcher{} }
+func True() Matcher {
+	_ = "STUB: not implemented"
+	return *
 
-// Or matcher, checks if at least one of the given matchers matches the record
-func Or(matchers ...Matcher) Matcher { return &or{children: matchers} }
+	// Or matcher, checks if at least one of the given matchers matches the record
+	new(Matcher)
+}
+
+func Or(matchers ...Matcher) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // And matcher, checks if all of the given matchers matches the record
-func And(matchers ...Matcher) Matcher { return &and{children: matchers} }
+func And(matchers ...Matcher) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }
 
 // Not matcher, checks if all of the given matchers return false
-func Not(matchers ...Matcher) Matcher { return &not{children: matchers} }
+func Not(matchers ...Matcher) Matcher { _ = "STUB: not implemented"; return *new(Matcher) }

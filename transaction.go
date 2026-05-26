@@ -1,7 +1,5 @@
 package storm
 
-import bolt "go.etcd.io/bbolt"
-
 // Tx is a transaction.
 type Tx interface {
 	// Commit writes all changes to disk.
@@ -12,41 +10,10 @@ type Tx interface {
 }
 
 // Begin starts a new transaction.
-func (n node) Begin(writable bool) (Node, error) {
-	var err error
-
-	n.tx, err = n.s.Bolt.Begin(writable)
-	if err != nil {
-		return nil, err
-	}
-
-	return &n, nil
-}
+func (n node) Begin(writable bool) (Node, error) { _ = "STUB: not implemented"; return *new(Node), nil }
 
 // Rollback closes the transaction and ignores all previous updates.
-func (n *node) Rollback() error {
-	if n.tx == nil {
-		return ErrNotInTransaction
-	}
-
-	err := n.tx.Rollback()
-	if err == bolt.ErrTxClosed {
-		return ErrNotInTransaction
-	}
-
-	return err
-}
+func (n *node) Rollback() error { _ = "STUB: not implemented"; return nil }
 
 // Commit writes all changes to disk.
-func (n *node) Commit() error {
-	if n.tx == nil {
-		return ErrNotInTransaction
-	}
-
-	err := n.tx.Commit()
-	if err == bolt.ErrTxClosed {
-		return ErrNotInTransaction
-	}
-
-	return err
-}
+func (n *node) Commit() error { _ = "STUB: not implemented"; return nil }

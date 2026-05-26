@@ -3,9 +3,6 @@ package protobuf
 
 import (
 	"errors"
-
-	"github.com/asdine/storm/v3/codec/json"
-	"github.com/golang/protobuf/proto"
 )
 
 const name = "protobuf"
@@ -21,23 +18,17 @@ type protobufCodec int
 // Encode value with protocol buffer.
 // If type isn't a Protocol buffer Message, json encoder will be used instead.
 func (c protobufCodec) Marshal(v interface{}) ([]byte, error) {
-	message, ok := v.(proto.Message)
-	if !ok {
-		// toBytes() may need to encode non-protobuf type, if that occurs use json
-		return json.Codec.Marshal(v)
-	}
-	return proto.Marshal(message)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
+
+// toBytes() may need to encode non-protobuf type, if that occurs use json
 
 func (c protobufCodec) Unmarshal(b []byte, v interface{}) error {
-	message, ok := v.(proto.Message)
-	if !ok {
-		// toBytes() may have encoded non-protobuf type, if that occurs use json
-		return json.Codec.Unmarshal(b, v)
-	}
-	return proto.Unmarshal(b, message)
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (c protobufCodec) Name() string {
-	return name
-}
+// toBytes() may have encoded non-protobuf type, if that occurs use json
+
+func (c protobufCodec) Name() string { _ = "STUB: not implemented"; return "" }
